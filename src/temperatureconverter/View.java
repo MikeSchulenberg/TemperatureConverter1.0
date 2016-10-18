@@ -29,6 +29,7 @@ public class View extends JFrame
     
     private final int WIDTH = 350;
     private final int HEIGHT = 250;
+    private final String DEGREE_SYMBOL = "\u00B0";
     
     JTextField temperatureField;
     JLabel scaleLabel;
@@ -54,10 +55,10 @@ public class View extends JFrame
         
         setLayout(new GridLayout(4,1));
         
-        buildPanel1();
-        buildPanel2();
-        buildPanel3();
-        buildPanel4();
+        buildInputPanel();
+        buildScaleSelectionPanel();
+        buildOKbuttonPanel();
+        buildOutputPanel();
         
         setVisible(true);
     }
@@ -80,31 +81,32 @@ public class View extends JFrame
             String initialTempStr, String convertedTempStr)
     {
         DecimalFormat df = new DecimalFormat("#.##");
-        String initialTemp = df.format(converter.getInitialTemp());
-        String convertedTemp = df.format(converter.getConvertedTemp());
+        String initialTemp = df.format(converter.getInitialTemperature());
+        String convertedTemp = df.format(converter.getConvertedTemperature());
         
-        outputLabel.setText(initialTemp + "\u00B0 " + initialTempStr 
-                + " = " + convertedTemp + "\u00B0 " + convertedTempStr);
+        outputLabel.setText(initialTemp + DEGREE_SYMBOL + " " + initialTempStr 
+                + " = " + convertedTemp + DEGREE_SYMBOL + " " 
+                + convertedTempStr);
     }
     
-    private void buildPanel1()
+    private void buildInputPanel()
     {
         JLabel temperatureLabel = new JLabel("Enter temperature");
         
         temperatureField = new JTextField(6);
-        temperatureField.addActionListener(new okButtonListener());
+        temperatureField.addActionListener(new doConversionListener());
         
-        scaleLabel = new JLabel("\u00B0 F");
+        scaleLabel = new JLabel(DEGREE_SYMBOL + " F");
         
-        JPanel panel1 = new JPanel();
-        panel1.add(temperatureLabel);
-        panel1.add(temperatureField);
-        panel1.add(scaleLabel);
+        JPanel inputPanel = new JPanel();
+        inputPanel.add(temperatureLabel);
+        inputPanel.add(temperatureField);
+        inputPanel.add(scaleLabel);
         
-        add(panel1);
+        add(inputPanel);
     }
     
-    private void buildPanel2()
+    private void buildScaleSelectionPanel()
     {
         toCelsius = new JRadioButton("Convert to Celsius", true);
         toFahrenheit = new JRadioButton("Convert to Fahrenheit", false);
@@ -116,32 +118,32 @@ public class View extends JFrame
         toCelsius.addActionListener(new radioButtonListener());
         toFahrenheit.addActionListener(new radioButtonListener());
         
-        JPanel panel2 = new JPanel();
-        panel2.add(toCelsius);
-        panel2.add(toFahrenheit);
+        JPanel scaleSelectionPanel = new JPanel();
+        scaleSelectionPanel.add(toCelsius);
+        scaleSelectionPanel.add(toFahrenheit);
         
-        add(panel2);
+        add(scaleSelectionPanel);
     }
     
-    private void buildPanel3()
+    private void buildOKbuttonPanel()
     {
         JButton okButton = new JButton("OK");
-        okButton.addActionListener(new okButtonListener());
+        okButton.addActionListener(new doConversionListener());
         
-        JPanel panel3 = new JPanel();
-        panel3.add(okButton);
+        JPanel okButtonPanel = new JPanel();
+        okButtonPanel.add(okButton);
         
-        add(panel3);
+        add(okButtonPanel);
     }
     
-    private void buildPanel4()
+    private void buildOutputPanel()
     {
         outputLabel = new JLabel();
         
-        JPanel panel4 = new JPanel();
-        panel4.add(outputLabel);
+        JPanel outputPanel = new JPanel();
+        outputPanel.add(outputLabel);
         
-        add(panel4);
+        add(outputPanel);
     }
     
     private class radioButtonListener implements ActionListener
@@ -153,17 +155,17 @@ public class View extends JFrame
             
             if (convertToCelsius)
             {
-                scaleLabel.setText("\u00B0 F");
+                scaleLabel.setText(DEGREE_SYMBOL + " F");
             }
             
             else
             {
-                scaleLabel.setText("\u00B0 C");
+                scaleLabel.setText(DEGREE_SYMBOL + " C");
             }
         }
     }
     
-    private class okButtonListener implements ActionListener
+    private class doConversionListener implements ActionListener
     {
         @Override
         public void actionPerformed(ActionEvent e)

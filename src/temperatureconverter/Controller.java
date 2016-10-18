@@ -25,12 +25,12 @@ public class Controller
         VIEW.initializeView(this);
     }
     
-    public void convertToCelsius(String input)
+    public void convertToCelsius(String temperature)
     {
         try
         {
-            double initialTemp = Double.parseDouble(input);
-            CONVERTER.convertToCelsius(initialTemp);
+            double temp = Double.parseDouble(temperature);
+            CONVERTER.doConvertToCelsius(temp);
             VIEW.printConvertedTemperature(CONVERTER, "F", "Celsius");
         }
         
@@ -40,12 +40,12 @@ public class Controller
         }
     }
     
-    public void convertToFahrenheit(String input)
+    public void convertToFahrenheit(String temperature)
     {
         try
         {
-            double initialTemp = Double.parseDouble(input);
-            CONVERTER.convertToFahrenheit(initialTemp);
+            double temp = Double.parseDouble(temperature);
+            CONVERTER.doConvertToFahrenheit(temp);
             VIEW.printConvertedTemperature(CONVERTER, "C", "Fahrenheit");
         }
         

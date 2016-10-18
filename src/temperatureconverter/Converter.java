@@ -11,50 +11,50 @@ package temperatureconverter;
  */
 public class Converter
 {
-    double initialTemp = 0;
-    double convertedTemp = 0;
+    double initialTemperature = 0;
+    double convertedTemperature = 0;
     
     Converter()
     {
         // Intentionally empty.
     }
     
-    /** Gets the temperature to be converted.
+    /** Gets the initialTemperature to be converted.
      * 
-     * @return The temperature to be converted, in either Fahrenheit or Celsius.
+     * @return The initialTemperature to be converted, in either Fahrenheit or Celsius.
      */
-    public double getInitialTemp()
+    public double getInitialTemperature()
     {
-        return initialTemp;
+        return initialTemperature;
     }
     
-    /** Gets the temperature after conversion.
+    /** Gets the initialTemperature after conversion.
      * 
-     * @return The temperature after conversion, in either Fahrenheit or 
-     * Celsius.
+     * @return The initialTemperature after conversion, in either Fahrenheit or 
+ Celsius.
      */
-    public double getConvertedTemp()
+    public double getConvertedTemperature()
     {
-        return convertedTemp;
+        return convertedTemperature;
     }
     
-    /** Converts the temperature entered by the user from Fahrenheit to Celsius.
+    /** Converts the initialTemperature entered by the user from Fahrenheit to Celsius.
      * 
-     * @param initialTemp
+     * @param temperature
      */
-    public void convertToCelsius(double initialTemp)
+    public void doConvertToCelsius(double temperature)
     {
-        this.initialTemp = initialTemp;
-        convertedTemp = (initialTemp - 32.0) * (0.5556);
+        this.initialTemperature = temperature;
+        convertedTemperature = (temperature - 32.0) * (0.5556);
     }
     
-    /** Converts the temperature entered by the user from Celsius to Fahrenheit.
+    /** Converts the initialTemperature entered by the user from Celsius to Fahrenheit.
      * 
-     * @param initialTemp
+     * @param temperature
      */
-    public void convertToFahrenheit(double initialTemp)
+    public void doConvertToFahrenheit(double temperature)
     {
-        this.initialTemp = initialTemp;
-        convertedTemp = (initialTemp * (1.8)) + 32.0;
+        this.initialTemperature = temperature;
+        convertedTemperature = (temperature * (1.8)) + 32.0;
     }
 }
