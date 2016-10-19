@@ -31,17 +31,20 @@ public class View extends JFrame
     private final int HEIGHT = 250;
     private final String DEGREE_SYMBOL = "\u00B0";
     
+    private enum ConversionMode {CELSIUS_TO_FAHHRENHEIT, FAHRENHEIT_TO_CELSIUS};
+    private ConversionMode conversionMode;
+    
     JTextField temperatureField;
     JLabel scaleLabel;
-    JRadioButton toCelsius;
-    JRadioButton toFahrenheit;
+    JRadioButton celsiusRadioButton;
+    JRadioButton fahrenheitRadioButton;
     JLabel outputLabel;
     
     boolean convertToCelsius = true;
     
     View()
     {
-        // Deliberately empty.
+        conversionMode = ConversionMode.CELSIUS_TO_FAHHRENHEIT;
     }
     
     public void initializeView(Controller controller)
@@ -108,19 +111,20 @@ public class View extends JFrame
     
     private void buildScaleSelectionPanel()
     {
-        toCelsius = new JRadioButton("Convert to Celsius", true);
-        toFahrenheit = new JRadioButton("Convert to Fahrenheit", false);
+        celsiusRadioButton = new JRadioButton("Convert to Celsius", true);
+        fahrenheitRadioButton = new JRadioButton("Convert to Fahrenheit", 
+                false);
         
         ButtonGroup radioButtons = new ButtonGroup();
-        radioButtons.add(toCelsius);
-        radioButtons.add(toFahrenheit);
+        radioButtons.add(celsiusRadioButton);
+        radioButtons.add(fahrenheitRadioButton);
         
-        toCelsius.addActionListener(new radioButtonListener());
-        toFahrenheit.addActionListener(new radioButtonListener());
+        celsiusRadioButton.addActionListener(new radioButtonListener());
+        fahrenheitRadioButton.addActionListener(new radioButtonListener());
         
         JPanel scaleSelectionPanel = new JPanel();
-        scaleSelectionPanel.add(toCelsius);
-        scaleSelectionPanel.add(toFahrenheit);
+        scaleSelectionPanel.add(celsiusRadioButton);
+        scaleSelectionPanel.add(fahrenheitRadioButton);
         
         add(scaleSelectionPanel);
     }
@@ -150,17 +154,25 @@ public class View extends JFrame
     {
         @Override
         public void actionPerformed(ActionEvent e)
-        {
-            convertToCelsius = (e.getSource() == toCelsius);
-            
-            if (convertToCelsius)
+        {           
+            if (e.getSource() == celsiusRadioButton)
             {
-                scaleLabel.setText(DEGREE_SYMBOL + " F");
+                conversionMode = ConversionMode.FAHRENHEIT_TO_CELSIUS;
             }
             
             else
             {
-                scaleLabel.setText(DEGREE_SYMBOL + " C");
+                conversionMode = ConversionMode.CELSIUS_TO_FAHHRENHEIT;
+            }
+            
+            switch(conversionMode)
+            {
+                case FAHRENHEIT_TO_CELSIUS :
+                    scaleLabel.setText(DEGREE_SYMBOL + " F");
+                    break;
+                case CELSIUS_TO_FAHHRENHEIT :
+                    scaleLabel.setText(DEGREE_SYMBOL + " C");
+                    break;               
             }
         }
     }
@@ -172,14 +184,14 @@ public class View extends JFrame
         {
             String input = temperatureField.getText();           
             
-            if (convertToCelsius)
+            switch(conversionMode)
             {
-                controller.convertToCelsius(input);
-            }
-            
-            else
-            {
-                controller.convertToFahrenheit(input);
+                case FAHRENHEIT_TO_CELSIUS :
+                    controller.convertToCelsius(input);
+                    break;
+                case CELSIUS_TO_FAHHRENHEIT :
+                    controller.convertToFahrenheit(input);
+                    break;               
             }
         }    
     }
