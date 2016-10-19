@@ -94,7 +94,7 @@ public class View extends JFrame
     
     private void buildInputPanel()
     {
-        JLabel temperatureLabel = new JLabel("Enter temperature");
+        JLabel temperatureLabel = new JLabel("Temperature");
         
         temperatureField = new JTextField(6);
         temperatureField.addActionListener(new doConversionListener());
