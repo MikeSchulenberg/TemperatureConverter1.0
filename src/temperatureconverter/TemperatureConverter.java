@@ -23,6 +23,5 @@ public class TemperatureConverter
         Controller controller = new Controller(converter, view);
         
         controller.initializeView();
-    }
-    
+    } 
 }

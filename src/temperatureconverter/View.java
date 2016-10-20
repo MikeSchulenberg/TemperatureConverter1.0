@@ -31,7 +31,7 @@ public class View extends JFrame
     private final int HEIGHT = 250;
     private final String DEGREE_SYMBOL = "\u00B0";
     
-    private enum ConversionMode {CELSIUS_TO_FAHHRENHEIT, FAHRENHEIT_TO_CELSIUS};
+    private enum ConversionMode {FAHRENHEIT_TO_CELSIUS, CELSIUS_TO_FAHHRENHEIT};
     private ConversionMode conversionMode;
     
     JTextField temperatureField;
@@ -44,7 +44,7 @@ public class View extends JFrame
     
     View()
     {
-        conversionMode = ConversionMode.CELSIUS_TO_FAHHRENHEIT;
+        conversionMode = ConversionMode.FAHRENHEIT_TO_CELSIUS;
     }
     
     public void initializeView(Controller controller)
