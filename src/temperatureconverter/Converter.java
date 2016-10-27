@@ -1,17 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package temperatureconverter;
-
-/**
+/** This class stores temperature data entered by the user and converts it
+ * from Fahrenheit to Celsius and from Celsius to Fahrenheit. It functions as
+ * the Model according to the Model-View-Controller design pattern.
+ * 
+ * It should accept outside commands only through a Converter object.
  *
  * @author Mike Schulenberg
+ * @version 1.0
+ * @since 10/19/16
  */
+
+package temperatureconverter;
+
 public class Converter
 {
-    double initialTemperature = 0;
+    // the temperature in degrees before conversion
+    double initialTemperature = 0;      
+    // the temperature in degrees after conversion
     double convertedTemperature = 0;
     
     Converter()
@@ -19,42 +23,41 @@ public class Converter
         // Intentionally empty.
     }
     
-    /** Gets the initialTemperature to be converted.
+    /** Gets the temperature data as entered by the user.
      * 
-     * @return The initialTemperature to be converted, in either Fahrenheit or Celsius.
+     * @return The temperature in degrees before conversion.
      */
     public double getInitialTemperature()
     {
         return initialTemperature;
     }
     
-    /** Gets the initialTemperature after conversion.
+    /** Gets the converted temperature.
      * 
-     * @return The initialTemperature after conversion, in either Fahrenheit or 
- Celsius.
+     * @return The temperature in degrees after conversion.
      */
     public double getConvertedTemperature()
     {
         return convertedTemperature;
     }
     
-    /** Converts the initialTemperature entered by the user from Fahrenheit to Celsius.
+    /** Converts the temperature entered by the user from Fahrenheit to Celsius.
      * 
-     * @param temperature
+     * @param temperature The temperature in degrees.
      */
     public void doConvertToCelsius(double temperature)
     {
-        this.initialTemperature = temperature;
+        initialTemperature = temperature;
         convertedTemperature = (temperature - 32.0) * (0.5556);
     }
     
-    /** Converts the initialTemperature entered by the user from Celsius to Fahrenheit.
+    /** Converts the temperature entered by the user from Celsius to Fahrenheit.
      * 
-     * @param temperature
+     * @param temperature The temperature in degrees.
      */
     public void doConvertToFahrenheit(double temperature)
     {
-        this.initialTemperature = temperature;
+        initialTemperature = temperature;
         convertedTemperature = (temperature * (1.8)) + 32.0;
     }
 }

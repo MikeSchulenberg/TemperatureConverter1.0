@@ -1,14 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package temperatureconverter;
-
-/**
+/** This program converts the temperature in degrees from Fahrenheit to Celsius
+ * and Celsius to Fahrenheit. It follows the Model-View-Controller design 
+ * pattern:
+ * https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
  *
  * @author Mike Schulenberg
+ * @version 1.0
+ * @since 10/19/16
  */
+
+package temperatureconverter;
+
 public class TemperatureConverter
 {
 
@@ -17,11 +18,13 @@ public class TemperatureConverter
      */
     public static void main( String[] args )
     {
-        // TODO code application logic here
+        /* Create all program objects, passing the Model and View objects to
+        the controller. */
         Converter converter = new Converter();
         View view = new View();
         Controller controller = new Controller(converter, view);
         
+        // Create the GUI.
         controller.initializeView();
     } 
 }

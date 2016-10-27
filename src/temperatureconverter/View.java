@@ -1,8 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/** This class creates the GUI and displays it to the user.
+ * 
+ * It should accept outside commands only through a Converter object.
+ *
+ * @author Mike Schulenberg
+ * @version 1.0
+ * @since 10/19/16
  */
+
 package temperatureconverter;
 
 import javax.swing.JFrame;
@@ -19,38 +23,53 @@ import java.awt.event.ActionEvent;
 
 import java.text.DecimalFormat;
 
-/**
- *
- * @author Mike Schulenberg
- */
 public class View extends JFrame
 {
+    // to signal the Controller when ActionEvents are triggered
     private Controller controller;
     
+    // default width of the GUI in pixels
     private final int WIDTH = 350;
+    // default height of the GUI in pixels
     private final int HEIGHT = 250;
-    private final String DEGREE_SYMBOL = "\u00B0";
+    // the character ° for use in text output
+    private final String DEGREE_SIGN = "\u00B0";
     
+    // used to switch between temperature conversion modes
     private enum ConversionMode {FAHRENHEIT_TO_CELSIUS, CELSIUS_TO_FAHHRENHEIT};
-    private ConversionMode conversionMode;
+    // default conversion mode
+    private ConversionMode conversionMode 
+            = ConversionMode.FAHRENHEIT_TO_CELSIUS;
     
+    // field where the user enters the tempature to be converted
     JTextField temperatureField;
+    /* visual cue that informs the user which temperature scale is currently
+    being converted from */
     JLabel scaleLabel;
+    
+    /* radio buttons that allow the user to select the temperature conversion
+    mode */
     JRadioButton celsiusRadioButton;
     JRadioButton fahrenheitRadioButton;
-    JLabel outputLabel;
     
-    boolean convertToCelsius = true;
+    // label that displays the conversion result; also displays error messages
+    JLabel outputLabel;
     
     View()
     {
-        conversionMode = ConversionMode.FAHRENHEIT_TO_CELSIUS;
+        // Intentionally empty.
     }
     
-    public void initializeView(Controller controller)
+    /** Builds the GUI. Requires a Controller object so ActionListener events
+     * can be passed along to the Converter.
+     * 
+     * @param controller A Controller object.
+     */
+    public void doInitializeView(Controller controller)
     {
         this.controller = controller;
         
+        // set window characteristics
         setSize(WIDTH, HEIGHT);
         setResizable(false);
         setTitle("Temperature Converter");
@@ -58,6 +77,7 @@ public class View extends JFrame
         
         setLayout(new GridLayout(4,1));
         
+        // build the component panels
         buildInputPanel();
         buildScaleSelectionPanel();
         buildOKbuttonPanel();
@@ -66,6 +86,9 @@ public class View extends JFrame
         setVisible(true);
     }
     
+    /** Prints an error message to the GUI to inform the user of an input
+     * error.
+     */
     public void printInputError()
     {
         outputLabel.setText("Error. Invalid temperature data.");
@@ -83,114 +106,156 @@ public class View extends JFrame
     public void printConvertedTemperature(Converter converter, 
             String initialTempStr, String convertedTempStr)
     {
+        /* Prepare the unconverted and converted temperatures for output by
+        converting them to Strings. */
         DecimalFormat df = new DecimalFormat("#.##");
         String initialTemp = df.format(converter.getInitialTemperature());
         String convertedTemp = df.format(converter.getConvertedTemperature());
         
-        outputLabel.setText(initialTemp + DEGREE_SYMBOL + " " + initialTempStr 
-                + " = " + convertedTemp + DEGREE_SYMBOL + " " 
+        // Print the temperature conversion result to the GUI.
+        outputLabel.setText(initialTemp + DEGREE_SIGN + " " + initialTempStr 
+                + " = " + convertedTemp + DEGREE_SIGN + " " 
                 + convertedTempStr);
     }
     
+    /** Builds the JPanel where the user enters the temperature to be converted.
+     */
     private void buildInputPanel()
     {
+        /* Create all components, including an ActionListener for the JTextField
+        where the user enters the temperature to be converted. Hitting the 
+        Return key will execute the conversion. */
+        
         JLabel temperatureLabel = new JLabel("Temperature");
         
         temperatureField = new JTextField(6);
         temperatureField.addActionListener(new doConversionListener());
         
-        scaleLabel = new JLabel(DEGREE_SYMBOL + " F");
+        scaleLabel = new JLabel(DEGREE_SIGN + " F");
         
+        // Add components to a JPanel.
         JPanel inputPanel = new JPanel();
         inputPanel.add(temperatureLabel);
         inputPanel.add(temperatureField);
         inputPanel.add(scaleLabel);
         
+        // Add the JPanel to the GUI.
         add(inputPanel);
     }
     
+    /** Builds the JPanel where the user selects the temperature conversion 
+     * mode.
+     */
     private void buildScaleSelectionPanel()
     {
+        /* Create RadioButtons to allow the use to select the temperature
+        conversion mode. */      
         celsiusRadioButton = new JRadioButton("Convert to Celsius", true);
         fahrenheitRadioButton = new JRadioButton("Convert to Fahrenheit", 
                 false);
         
+        // Add the RadioButtons to a ButtonGroup.
         ButtonGroup radioButtons = new ButtonGroup();
         radioButtons.add(celsiusRadioButton);
         radioButtons.add(fahrenheitRadioButton);
         
+        // Add ActionListeners to the RadioButtons.
         celsiusRadioButton.addActionListener(new radioButtonListener());
         fahrenheitRadioButton.addActionListener(new radioButtonListener());
         
+        // Add components to a JPanel.
         JPanel scaleSelectionPanel = new JPanel();
         scaleSelectionPanel.add(celsiusRadioButton);
         scaleSelectionPanel.add(fahrenheitRadioButton);
         
+        // Add the JPanel to the GUI.
         add(scaleSelectionPanel);
     }
     
+    /** Builds the JPanel where the user can press a button to execute the
+     * temperature conversion.
+     */
     private void buildOKbuttonPanel()
     {
+        // Prepare a JButton with ActionListener.
         JButton okButton = new JButton("OK");
         okButton.addActionListener(new doConversionListener());
         
+        // Add components to a JPanel.
         JPanel okButtonPanel = new JPanel();
         okButtonPanel.add(okButton);
         
+        // Add the JPanel to the GUI.
         add(okButtonPanel);
     }
     
+    /** Builds the JPanel where the results of the temperature conversion are
+     * displayed, as well as any error messages generated by user action. 
+     */
     private void buildOutputPanel()
     {
         outputLabel = new JLabel();
         
+        // Add components to a JPanel.
         JPanel outputPanel = new JPanel();
         outputPanel.add(outputLabel);
         
+        // Add the JPanel to the GUI.
         add(outputPanel);
     }
     
+    /** Lets the user select the temperature conversion mode by clicking on one
+     * of the radio buttons. 
+     */
     private class radioButtonListener implements ActionListener
     {
         @Override
         public void actionPerformed(ActionEvent e)
         {           
+            /* Update the temperature selection mode based on which radio
+            button the user selects */
+            
             if (e.getSource() == celsiusRadioButton)
             {
                 conversionMode = ConversionMode.FAHRENHEIT_TO_CELSIUS;
             }
             
-            else
+            else    
             {
                 conversionMode = ConversionMode.CELSIUS_TO_FAHHRENHEIT;
             }
             
+            /* update `scaleLabel` based on the current temperature selection
+            mode */
             switch(conversionMode)
             {
                 case FAHRENHEIT_TO_CELSIUS :
-                    scaleLabel.setText(DEGREE_SYMBOL + " F");
+                    scaleLabel.setText(DEGREE_SIGN + " F");
                     break;
                 case CELSIUS_TO_FAHHRENHEIT :
-                    scaleLabel.setText(DEGREE_SYMBOL + " C");
+                    scaleLabel.setText(DEGREE_SIGN + " C");
                     break;               
             }
         }
     }
     
+    /** Signals the Controller to execute the temperature conversion.
+     * 
+     */
     private class doConversionListener implements ActionListener
     {
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            String input = temperatureField.getText();           
+            String temperature = temperatureField.getText();           
             
             switch(conversionMode)
             {
                 case FAHRENHEIT_TO_CELSIUS :
-                    controller.convertToCelsius(input);
+                    controller.convertToCelsius(temperature);
                     break;
                 case CELSIUS_TO_FAHHRENHEIT :
-                    controller.convertToFahrenheit(input);
+                    controller.convertToFahrenheit(temperature);
                     break;               
             }
         }    
