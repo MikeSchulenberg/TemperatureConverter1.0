@@ -43,6 +43,9 @@ public class View extends JFrame
     
     // field where the user enters the tempature to be converted
     JTextField temperatureField;
+    /* visual cue that informs the user which temperature scale is currently
+    being converted from */
+    JLabel scaleLabel;
     
     /* radio buttons that allow the user to select the temperature conversion
     mode */
@@ -128,10 +131,13 @@ public class View extends JFrame
         temperatureField = new JTextField(6);
         temperatureField.addActionListener(new doConversionListener());
         
+        scaleLabel = new JLabel(DEGREE_SIGN + " F");
+        
         // Add components to a JPanel.
         JPanel inputPanel = new JPanel();
         inputPanel.add(temperatureLabel);
         inputPanel.add(temperatureField);
+        inputPanel.add(scaleLabel);
         
         // Add the JPanel to the GUI.
         add(inputPanel);
@@ -217,7 +223,19 @@ public class View extends JFrame
             else    
             {
                 conversionMode = ConversionMode.CELSIUS_TO_FAHHRENHEIT;
-            }            
+            }
+            
+            /* update `scaleLabel` based on the current temperature selection
+            mode */
+            switch(conversionMode)
+            {
+                case FAHRENHEIT_TO_CELSIUS :
+                    scaleLabel.setText(DEGREE_SIGN + " F");
+                    break;
+                case CELSIUS_TO_FAHHRENHEIT :
+                    scaleLabel.setText(DEGREE_SIGN + " C");
+                    break;               
+            }
         }
     }
     
