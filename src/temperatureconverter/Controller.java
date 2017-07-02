@@ -1,8 +1,9 @@
 /** This class relays commands to the Converter and View objects.
  *
- * @author Mike Schulenberg
+ * filename: Controller.java
+ * @author Mike Schulenberg - mike.schulenberg@gmail.com
  * @version 1.0
- * @since 10/19/16
+ * Copyright (c) 2017 Mike Schulenberg
  */
 
 package temperatureconverter;

@@ -1,10 +1,11 @@
 /** This class creates the GUI and displays it to the user.
  * 
- * It should accept outside commands only through a Converter object.
+ * It should accept outside commands only through a Controller object.
  *
- * @author Mike Schulenberg
+ * filename: View.java
+ * @author Mike Schulenberg - mike.schulenberg@gmail.com
  * @version 1.0
- * @since 10/19/16
+ * Copyright (c) 2017 Mike Schulenberg
  */
 
 package temperatureconverter;

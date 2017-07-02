@@ -1,12 +1,12 @@
 /** This class stores temperature data entered by the user and converts it
- * from Fahrenheit to Celsius and from Celsius to Fahrenheit. It functions as
- * the Model according to the Model-View-Controller design pattern.
+ * from Fahrenheit to Celsius and from Celsius to Fahrenheit.
  * 
- * It should accept outside commands only through a Converter object.
+ * It should accept outside commands only through a Controller object.
  *
- * @author Mike Schulenberg
+ * filename: Converter.java
+ * @author Mike Schulenberg - mike.schulenberg@gmail.com
  * @version 1.0
- * @since 10/19/16
+ * Copyright (c) 2017 Mike Schulenberg
  */
 
 package temperatureconverter;
