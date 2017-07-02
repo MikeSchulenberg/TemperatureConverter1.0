@@ -29,7 +29,7 @@ public class View extends JFrame
     private Controller controller;
     
     // default width of the GUI in pixels
-    private final int WIDTH = 350;
+    private final int WIDTH = 500;
     // default height of the GUI in pixels
     private final int HEIGHT = 250;
     // the character ° for use in text output
@@ -72,7 +72,7 @@ public class View extends JFrame
         // set window characteristics
         setSize(WIDTH, HEIGHT);
         setResizable(false);
-        setTitle("Temperature Converter");
+        setTitle("Temperature Converter 1.0");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         setLayout(new GridLayout(4,1));
