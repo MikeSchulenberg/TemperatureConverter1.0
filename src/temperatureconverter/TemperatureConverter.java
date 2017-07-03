@@ -1,5 +1,5 @@
 /** This program converts the temperature in degrees from Fahrenheit to Celsius
- * and Celsius to Fahrenheit. It uses the Model-View-Controller design pattern.
+ * and Celsius to Fahrenheit.
  *
  * filename: TemperatureConverter.java
  * @author Mike Schulenberg - mike.schulenberg@gmail.com
@@ -18,7 +18,7 @@ public class TemperatureConverter
     public static void main( String[] args )
     {
         /* Create all program objects, passing the Model and View objects to
-        the controller. */
+        the Controller. */
         Converter converter = new Converter();
         View view = new View();
         Controller controller = new Controller(converter, view);

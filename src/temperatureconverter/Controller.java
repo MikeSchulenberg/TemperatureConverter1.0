@@ -1,4 +1,4 @@
-/** This class relays commands to the Converter and View objects.
+/** This class regulates method calls between a Converter and a View object.
  *
  * filename: Controller.java
  * @author Mike Schulenberg - mike.schulenberg@gmail.com
@@ -34,7 +34,7 @@ public class Controller
     }
     
     /** Instructs the Converter to convert the temperature from Fahrenheit to
-     * Celsius. Instructs the View to display the converted temperature.
+     * Celsius. Also instructs the View to display the converted temperature.
      * 
      * @param temperature The temperature in degrees.
      */
@@ -56,7 +56,7 @@ public class Controller
     }
     
     /** Instructs the Converter to convert the temperature from Celsius to
-     * Fahrenheit. Instructs the View to display the converted temperature.
+     * Fahrenheit. Also instructs the View to display the converted temperature.
      * 
      * @param temperature The temperature in degrees.
      */

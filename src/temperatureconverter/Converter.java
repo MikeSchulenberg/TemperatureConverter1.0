@@ -1,7 +1,5 @@
 /** This class stores temperature data entered by the user and converts it
  * from Fahrenheit to Celsius and from Celsius to Fahrenheit.
- * 
- * It should accept outside commands only through a Controller object.
  *
  * filename: Converter.java
  * @author Mike Schulenberg - mike.schulenberg@gmail.com

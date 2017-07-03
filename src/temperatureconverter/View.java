@@ -1,6 +1,4 @@
-/** This class creates the GUI and displays it to the user.
- * 
- * It should accept outside commands only through a Controller object.
+/** This class implements a GUI for a temperature conversion program.
  *
  * filename: View.java
  * @author Mike Schulenberg - mike.schulenberg@gmail.com
@@ -26,7 +24,7 @@ import java.text.DecimalFormat;
 
 public class View extends JFrame
 {
-    // to signal the Controller when ActionEvents are triggered
+    // a Controller to signal when ActionEvents are triggered
     private Controller controller;
     
     // default width of the GUI in pixels
@@ -96,9 +94,9 @@ public class View extends JFrame
      * 
      * @param converter A Converter object storing temperature data entered by
      * the user.
-     * @param initialTempStr A String naming the measurement used for the
+     * @param initialTempStr A String naming the scale used for the
      * initial temperature--either "Fahrenheit" or "Celsius."
-     * @param convertedTempStr A String naming the measurement used for the
+     * @param convertedTempStr A String naming the scale used for the
      * converted temperature--either "Fahrenheit" or "Celsius."
      */
     public void printConvertedTemperature(Converter converter, 
