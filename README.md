@@ -29,3 +29,5 @@ The program interface has 3 parts:
 - an area to display the conversion result
 	
 To convert a temperature, enter a value in the 'Temperature' field. Select either the 'Convert to Celsius' or 'Convert to Fahrenheit' to select the target temperature scale, then click the 'OK' button to see the result.
+
+![alt text](https://github.com/MikeSchulenberg/TemperatureConverter1.0/blob/master/TemperatureConverter1.0-img.JPG)
