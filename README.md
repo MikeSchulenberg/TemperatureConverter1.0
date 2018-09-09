@@ -10,7 +10,7 @@ Mike Schulenberg
 ## Development
 This program was written in Java using NetBeans and Swing.
 
-## Download an Executable For Java
+## Download an Executable for Java
 [Temperature Converter 1.0](https://www.dropbox.com/s/etmm6i3ny10ulhk/TemperatureConverter1.0.zip?dl=1)
 
 #### ZIP File Contents
